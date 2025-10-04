@@ -5,4 +5,36 @@
 
 body{
     background-color: black;
+    color: white;
+    text-align: center;
+    
+}
+
+img {
+    width: 22%;
+    height: 22%;
+   
+}
+button{
+    border-radius: 5px;
+    padding: 5px 10px;
+    text-align: center;
+    font-size: 15px;
+    border: none;
+}
+button#btn-cadastrar-evento{
+    background-color: #b201ff;
+    color: white;
+}
+
+div.main-botoes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 20px;
+}
+div.main-botoes button{v
+    width: 200px;
+    margin: 0 auto;
 }
