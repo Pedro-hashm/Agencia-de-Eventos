@@ -13,8 +13,10 @@ body{
 img {
     width: 22%;
     height: 22%;
+    margin: none;
    
 }
+
 button{
     border-radius: 5px;
     padding: 5px 10px;
@@ -22,19 +24,21 @@ button{
     font-size: 15px;
     border: none;
 }
-button#btn-cadastrar-evento{
+
+button#btnCadastrar{
     background-color: #b201ff;
     color: white;
 }
 
-div.main-botoes {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 5px;
-    margin-top: 20px;
-}
-div.main-botoes button{v
+
+div.main-botoes button{
     width: 200px;
     margin: 0 auto;
+}
+
+table {
+  margin: 20px auto;
+  border-collapse: collapse;
+  width: 80%;
+  display: none; /* 👈 começa oculta */
 }
