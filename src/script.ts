@@ -33,15 +33,14 @@ class GerenciadorEventos {
   }
 }
 
+console.log('oi');
 
 const gerenciador = new GerenciadorEventos();
 
-// Pegar elementos do HTML
 const form = document.getElementById("formEvento") as HTMLFormElement;
 const tabela = document.getElementById("tabelaEventos") as HTMLTableElement;
 const corpoTabela = document.getElementById("listaEventos") as HTMLTableSectionElement;
 
-// Cadastrar evento
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
@@ -49,16 +48,23 @@ form.addEventListener("submit", (e) => {
   const vagasInput = parseInt((document.getElementById("vagas") as HTMLInputElement).value);
   const nomeInput = (document.getElementById("nome") as HTMLInputElement).value;
 
-  const novaData = new Date(dataInput);
-  const novoEvento = new Evento(nomeInput, novaData, vagasInput);
+  const dataSelecionada = new Date(dataInput + "T00:00:00"); 
+  const hoje = new Date();
+  hoje.setHours(0, 0, 0, 0); 
+
+  if (dataSelecionada < hoje) {
+      alert("A data do evento não pode ser uma data passada. Por favor, escolha uma data futura.");
+      return; 
+  }
+
+  const novoEvento = new Evento(nomeInput, dataSelecionada, vagasInput);
   gerenciador.cadastrarEvento(novoEvento);
 
-  tabela.style.display = "table"; // 👈 mostra a tabela
+  tabela.classList.add("visible"); 
   atualizarTabela();
   form.reset();
 });
 
-// Atualizar tabela
 function atualizarTabela() {
   corpoTabela.innerHTML = "";
 
@@ -77,13 +83,13 @@ function atualizarTabela() {
     const vagasDispCelula = document.createElement("td");
     vagasDispCelula.textContent = evento.vagasDisponiveis.toString();
 
-    // Coluna de ações com botão "Reservar"
     const acoesCelula = document.createElement("td");
     const botaoReservar = document.createElement("button");
     botaoReservar.textContent = "Reservar";
 
     if (evento.vagasDisponiveis === 0) {
       botaoReservar.disabled = true;
+      botaoReservar.textContent = "Esgotado";
     }
 
     botaoReservar.addEventListener("click", () => {
@@ -100,4 +106,12 @@ function atualizarTabela() {
 
     corpoTabela.appendChild(linha);
   });
+}
+
+function toggleEvent() {
+  const form = document.getElementById("form") as HTMLDivElement;
+  const home = document.getElementById("home") as HTMLDivElement;
+
+  home.classList.toggle("hidden");
+  form.classList.toggle("hidden");
 }

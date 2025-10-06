@@ -4,46 +4,136 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cadastro de Eventos - Agência Vibe</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* Estilos adicionais para o carrossel */
+    .carousel {
+      max-width: 800px; /* Largura máxima do carrossel */
+      margin: 2rem auto; /* Centralizar e adicionar espaço */
+      border-radius: 10px;
+      overflow: hidden; /* Garante que as imagens não passem da borda arredondada */
+    }
+    .carousel-item img {
+      height: 450px; /* Altura fixa para as imagens */
+      object-fit: cover; /* Garante que a imagem cubra o espaço sem distorcer */
+    }
+    .carousel-caption {
+        background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente para a legenda */
+        border-radius: 5px;
+        padding: 10px;
+    }
+    .carousel-title {
+        margin-top: 3rem;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+  </style>
 </head>
 <body>
     
-    <img src="img/logoVibe.png" alt="logoVibe">
+    <div id="content" class="content">
 
-    <div class="container">
+      <img src="img/logoVibe.png" alt="logoVibe">
 
-        <h1>Cadastro de Eventos</h1>
+      <div id="home">
 
-        <div class="box-form">
-        <form id="formEvento">
+        <h1 class="title">Um pouco sobre a nossa Vibe</h1>
 
-        <label for="">Nome do evento</label>
-        <input type="text" id="nome" required><br>
+        <p>
+          Nossa missão é criar eventos que conectam pessoas, despertam emoções e deixam memórias que duram para sempre.
+        </p>
 
-        <label>Data do evento:</label>
-        <input type="date" id="data" required><br>
+        <p>Seja um aniversário, um show, um casamento ou aquele evento corporativo que ninguém acha que vai ser legal (mas a gente prova o contrário), <br> nós cuidamos de cada detalhe com criatividade, energia e, claro, a vibe certa.</p>
 
-        <label>Número de vagas:</label>
-        <input type="number" id="vagas" min="1" required><br>
+        <h2 class="carousel-title">Eventos organizados por nós:</h2>
+        <div id="eventCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active" data-bs-interval="3000">
+                <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=2070&auto=format&fit=crop" class="d-block w-100" alt="Rio Innovation Week">
+                <div class="carousel-caption d-none d-md-block">
+                  <h5>Rio Innovation Week</h5>
+                  <p>Um dos maiores eventos de inovação e tecnologia do Brasil, reunindo mentes brilhantes e novas ideias.</p>
+                </div>
+              </div>
+              <div class="carousel-item" data-bs-interval="3000">
+                <img src="https://i0.wp.com/institutocampusparty.org.br/wp-content/uploads/2023/02/imagem_2023-02-06_210121855.png?fit=1120%2C670&ssl=1" class="d-block w-100" alt="Campus Party Brasil">
+                <div class="carousel-caption d-none d-md-block">
+                  <h5>Campus Party Brasil</h5>
+                  <p>O festival de inovação, criatividade, ciência e empreendedorismo que inspira milhares de campuseiros.</p>
+                </div>
+              </div>
+              <div class="carousel-item" data-bs-interval="3000">
+                <img src="https://knect365.imgix.net/uploads/event-details-8-19551d29a56b0cbce09547673eac244d.jpg?auto=format&fit=max&w=412&dpr=5" class="d-block w-100" alt="GDC - Game Developers Conference">
+                <div class="carousel-caption d-none d-md-block">
+                  <h5>GDC - Game Developers Conference</h5>
+                  <p>Conferência global para desenvolvedores de jogos, com palestras, exposições e networking.</p>
+                </div>
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#eventCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#eventCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Próximo</span>
+            </button>
+        </div>
+        <div class="home-buttons">
+          <button onclick="toggleEvent()" id="cadastro">Cadastre seu Evento</button>
+          <button onclick="window.open('https://wa.me/5581991280320?text=Olá!%20Vim%20pelo%20site%20e%20quero%20saber%20mais.', '_blank')" id="contato">Contate-nos</button>
+        </div>
+      </div>
 
-        <button type="submit" id="btnCadastrar">Cadastrar</button>
-        </form>
+      <div id="form" class="hidden">
+
+        <div class="form-content">
+
+          <div class="top-form">
+            <h1 id="cadastroTitle">Cadastro de Eventos</h1>
+
+            <button onclick="toggleEvent()">
+              <i class="fa-solid fa-arrow-left"></i>
+            </button>
+
+          </div>
+
+          <div class="box-form">
+            <form id="formEvento">
+            <label for="">Nome do evento</label>
+            <input type="text" id="nome" required><br>
+            <label>Data do evento:</label>
+            <input type="date" id="data" required><br>
+            <label>Número de vagas:</label>
+            <input type="number" id="vagas" min="1" required><br>
+            <button type="submit" id="btnCadastrar">Cadastrar</button>
+            </form>
+          </div>
+
+          <table id="tabelaEventos">
+
+            <thead>
+              <tr>
+                <th>Nome do Evento</th>
+                <th>Data</th>
+                <th>Vagas Totais</th>
+                <th>Vagas Disponíveis</th>
+                <th>Reservar</th>
+              </tr>
+            </thead>
+
+            <tbody id="listaEventos"></tbody>
+          
+          </table>
+
         </div>
 
-    <table id="tabelaEventos">
-      <thead>
-        <tr>
-          <th>Nome do Evento</th>
-          <th>Data</th>
-          <th>Vagas Totais</th>
-          <th>Vagas Disponíveis</th>
-          <th>Reservar</th>
-        </tr>
-      </thead>
-      <tbody id="listaEventos"></tbody>
-    </table>
-  </div>
+      </div>
 
+    </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="/dist/script.js "></script>
 </body>
 </html>
